@@ -23,6 +23,9 @@ fi
 $PKG_MANAGER -y update;
 #Instalando dependências necessárias
 $PKG_MANAGER -y install git wget curl;
+#Verificando o IP local
+IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
+PORT_LOCAL_APP=8081;
 #Instalando o Docker
 curl -fsSL https://get.docker.com | sh;
 #Instalando o docker-compose
@@ -39,21 +42,26 @@ cd project;
 #DOCKER ========= 
 #Criando a imagem da aplicação
 cd docker;
-docker build -t lojavirtual-img .;
+docker build -t lojavirtual-img .; 
 #Executando o docker-compose
 docker-compose up -d;
 #Configurando aplicação
 cd codigo;
+cp .env.example .env
+#Substituindo variáveis no arquivo
+while read line
+do
+    eval echo "$line"
+done < "./.env"
+
 #php composer.phar install;
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
 #Montando a estrutura do BD
-#docker exec -ti lojavirtual-docker bash;
-#php artisan migrate;
-
-#IP local
-IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
+docker exec -ti lojavirtual-docker bash;
+php composer.phar install;
+php artisan migrate;
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
