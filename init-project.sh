@@ -29,6 +29,8 @@ curl -fsSL https://get.docker.com | sh;
 curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
 chmod +x /usr/local/bin/docker-compose;
 docker-compose --version;
+#Permissão ao usuário para o docker
+usermod -aG docker $USER;
 #Criando pasta de projeto para a aplicação
 cd /home/;
 #Clonando o Projeto
@@ -42,7 +44,8 @@ docker build -t lojavirtual-img .;
 docker-compose up -d;
 #Configurando aplicação
 cd codigo;
-php composer.phar install;
+#php composer.phar install;
+docker container ls;
 #Montando a estrutura do BD
 docker exec -ti lojavirtual-docker bash;
 php artisan migrate;

@@ -1,4 +1,5 @@
-version: '3'
+#Author: Jose Carlos Fernandes e F Filho <joselgn@gmail.com>
+#version: '3'
 
 #Banco de Dados
 db:
