@@ -60,8 +60,9 @@ echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
 #Montando a estrutura do BD
 docker exec -ti lojavirtual-docker bash;
-php composer.phar install;
-php artisan migrate;
+cd /var/www/html;
+sh config-container.sh;
+exit;
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
