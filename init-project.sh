@@ -46,15 +46,17 @@ docker-compose up -d;
 cd codigo;
 #php composer.phar install;
 #Visualizando containers ativos
-echo "Containers ativos:::";
+echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
 #Montando a estrutura do BD
-docker exec -ti lojavirtual-docker bash;
-php artisan migrate;
+#docker exec -ti lojavirtual-docker bash;
+#php artisan migrate;
 
+#IP local
+IP_LOCAL = ip route get 8.8.8.8 | head -1 | awk '{print $7}';
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-echo "Acesse o navegador no seguinte endereço http://172.17.0.1:8081/public/index.php";
+echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 
 

@@ -25,4 +25,4 @@ lojavirtual-docker:
      - db:db
   #depends_on:
    #  - db
-  command: "php artisan migrate"
+  command: "cd /var/www/html && php artisan migrate"
