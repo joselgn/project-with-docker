@@ -1,3 +1,5 @@
+version: '3'
+
 #Banco de Dados
 db:
   image: mariadb
@@ -21,5 +23,5 @@ lojavirtual-docker:
   links:
      - db:db
   depends_on:
-     - db:db
+     - db
   command: "php artisan migrate"
