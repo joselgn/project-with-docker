@@ -23,6 +23,6 @@ lojavirtual-docker:
     - ./codigo:/var/www/html
   links:
      - db:db
-  depends_on:
-     - db
+  #depends_on:
+   #  - db
   command: "php artisan migrate"

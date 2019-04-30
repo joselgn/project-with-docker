@@ -46,10 +46,12 @@ docker-compose up -d;
 cd codigo;
 #php composer.phar install;
 #Visualizando containers ativos
+echo "Containers ativos:::";
 docker container ls;
 #Montando a estrutura do BD
 docker exec -ti lojavirtual-docker bash;
 php artisan migrate;
+
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://172.17.0.1:8081/public/index.php";
