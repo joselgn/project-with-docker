@@ -53,7 +53,7 @@ docker container ls;
 #php artisan migrate;
 
 #IP local
-IP_LOCAL = ip route get 8.8.8.8 | head -1 | awk '{print $7}';
+IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
