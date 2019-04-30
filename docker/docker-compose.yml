@@ -1,0 +1,25 @@
+#Banco de Dados
+db:
+  image: mariadb
+  container_name: mariaDB
+  ports:
+      - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root  
+  volumes:
+     - ./mariadb/bd:/home/dados
+	 - ./mariadb/backup:/home/bkp 
+
+#Aplicação
+lojavirtual-docker:
+  image: lojavirtual-img
+  container_name: lojavirtual-docker
+  ports:
+    - "8081:80"
+  volumes:
+    - ./codigo:/var/www/html
+  links:
+     - db:db
+  depends_on:
+     - db:db
+  command: "php artisan migrate"
