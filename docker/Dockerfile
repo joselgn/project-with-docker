@@ -6,6 +6,6 @@
  #COPY ./config-container.sh /var/www/html
  RUN chmod -R 777 /var/www/html/storage
  #RUN cd /var/www/html && php composer.phar update
- RUN cd /var/www/html && php artisan key:generate
+ RUN cd /var/www/html && php artisan key:generate && php artisan config:cache
  EXPOSE 80 443
 
