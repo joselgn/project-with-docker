@@ -56,7 +56,7 @@ docker build -t lojavirtual-img .;
 #Executando o docker-compose
 docker-compose up -d;
 #Permissao storage 
-chmod -R 777 codigo/storage;
+chmod -R 777 codigo;
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
