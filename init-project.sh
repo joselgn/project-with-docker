@@ -47,26 +47,21 @@ docker build -t lojavirtual-img .;
 docker-compose up -d;
 #Configurando aplicação
 cd codigo;
-cp .env.example .env
 #Substituindo variáveis no arquivo
 while read line
 do
     eval echo "$line"
-done < "./.env"
+done < "./.env.example"
 
-#php composer.phar install;
+sh -c 'echo "'"$(cat .env)"'"';
+php composer.phar install;
+
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
-#Montando a estrutura do BD
-docker exec -ti lojavirtual-docker bash;
-cd /var/www/html;
-sh config-container.sh;
-exit;
-
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+echo "\n\n>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n
 
 
 
