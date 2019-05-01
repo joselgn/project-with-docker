@@ -50,8 +50,8 @@ php composer.phar install;
 touch .env;
 while read line
 do
-    eval echo "$line \n" > .env
-done < "./.env.example"
+    eval echo "$line"> .env <<'EOF
+done < "./.env.example";
 
 #Executando o docker-compose
 docker-compose up -d;
@@ -59,6 +59,7 @@ docker-compose up -d;
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
-echo "\n\n>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n";
+echo "\n\n>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n
+      Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php\n
+      >>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+exit;
