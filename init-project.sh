@@ -45,7 +45,6 @@ cd docker;
 docker build -t lojavirtual-img .; 
 #Configurando aplicação
 cd codigo;
-php composer.phar install;
 #Substituindo variáveis no arquivo
 touch .env;
 while read line
