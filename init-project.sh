@@ -20,21 +20,21 @@ if [ -f "/etc/debian_version" ];then
 fi
 
 #Atualizando o Packge Manager
-$PKG_MANAGER -y update;
+#$PKG_MANAGER -y update;
 #Instalando dependências necessárias
-$PKG_MANAGER -y install git wget curl;
+#$PKG_MANAGER -y install git wget curl;
 #Verificando o IP local
 IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
 PORT_LOCAL_APP=8081;
 PORT_LOCAL_BD=3306;
 #Instalando o Docker
-curl -fsSL https://get.docker.com | sh;
+#curl -fsSL https://get.docker.com | sh;
 #Instalando o docker-compose
-curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
-chmod +x /usr/local/bin/docker-compose;
-docker-compose --version;
+#curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
+#chmod +x /usr/local/bin/docker-compose;
+#docker-compose --version;
 #Permissão ao usuário para o docker
-usermod -aG docker $USER;
+#usermod -aG docker $USER;
 #Criando pasta de projeto para a aplicação
 cd /home/;
 #Clonando o Projeto
