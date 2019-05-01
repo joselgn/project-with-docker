@@ -26,6 +26,7 @@ $PKG_MANAGER -y install git wget curl;
 #Verificando o IP local
 IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
 PORT_LOCAL_APP=8081;
+PORT_LOCAL_BD=3306;
 #Instalando o Docker
 curl -fsSL https://get.docker.com | sh;
 #Instalando o docker-compose
