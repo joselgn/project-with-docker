@@ -3,14 +3,14 @@
 
 #Banco de Dados
 db:
-  image: mariadb
+  image: mariadb-img
   container_name: mariaDB
   ports:
       - "3306:3306"
   environment:
      MYSQL_ROOT_PASSWORD: root  
   volumes:
-     - ./mariadb/bd:/home/dados
+     - ./mariadb/bd:/var/lib/mysql
      - ./mariadb/backup:/home/bkp 
 
 #Aplicação
