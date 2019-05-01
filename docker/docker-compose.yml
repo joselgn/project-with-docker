@@ -3,7 +3,7 @@
 
 #Banco de Dados
 db:
-  image: mariadb-img
+  image: mariadb
   container_name: mariaDB
   ports:
       - "3306:3306"
