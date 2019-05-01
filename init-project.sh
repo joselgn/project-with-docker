@@ -43,28 +43,22 @@ cd project;
 #Criando a imagem da aplicação
 cd docker;
 docker build -t lojavirtual-img .; 
-#Executando o docker-compose
-docker-compose up -d;
 #Configurando aplicação
 cd codigo;
+php composer.phar install;
 #Substituindo variáveis no arquivo
+touch .env;
 while read line
 do
-    eval echo "$line"
+    eval echo "$line \n" > .env
 done < "./.env.example"
 
-sh -c 'echo "'"$(cat .env)"'"';
-php composer.phar install;
+#Executando o docker-compose
+docker-compose up -d;
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
 docker container ls;
 echo "\n\n>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 echo "Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php";
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n
-
-
-
-
-
-
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n";
