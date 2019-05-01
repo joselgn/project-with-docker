@@ -60,6 +60,9 @@ chmod -R 777 codigo;
 #Executando comandos de configuração da aplicação
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php composer.phar update";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:generate && php artisan config:cache";
+#Restaurando BD de teste
+cd mariadb/bd;
+cat lojavirtualdb.sql | docker exec -i mariaDB /usr/bin/mysql -u root --password=root lojavirtualdb
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";

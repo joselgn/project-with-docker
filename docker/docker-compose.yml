@@ -10,7 +10,7 @@ db:
   environment:
      MYSQL_ROOT_PASSWORD: root  
   volumes:
-     - ./mariadb/bd:/var/lib/mysql
+     - ./mariadb/bd:/home/bd
      - ./mariadb/backup:/home/bkp 
 
 #Aplicação
