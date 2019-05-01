@@ -41,9 +41,7 @@ cd /home/;
 git clone https://github.com/joselgn/project-with-docker.git project;
 cd project;
 #DOCKER ========= 
-#Criando a imagem da aplicação
 cd docker;
-docker build -t lojavirtual-img .; 
 #Configurando aplicação
 cd codigo;
 #Substituindo variáveis no arquivo
@@ -52,6 +50,9 @@ while read line
 do
     eval echo "$line">> .env 
 done < "./.env.example";
+#Criando a imagem da aplicação
+cd ../;
+docker build -t lojavirtual-img .; 
 
 #Executando o docker-compose
 docker-compose up -d;
