@@ -50,7 +50,7 @@ php composer.phar install;
 touch .env;
 while read line
 do
-    eval echo "$line"> .env <<'EOF
+    eval echo "$line"> .env <<'EOF'
 done < "./.env.example";
 
 #Executando o docker-compose
