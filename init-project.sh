@@ -57,6 +57,8 @@ docker build -t lojavirtual-img .;
 docker-compose up -d;
 #Permissao storage 
 chmod -R 777 codigo;
+#Executando comandos de configuração da aplicação
+docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:generate && php artisan config:cache";
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
