@@ -63,8 +63,9 @@ docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:ge
 #Restaurando BD de teste
 cd mariadb/bd;
 docker exec -ti mariaDB sh -c "mysql --user=root --password=root --execute='create database lojavirtualdb'";
-docker exec -ti mariaDB sh -c "cd /home/bd && /usr/bin/mysql --user=root --password=root lojavirtualdb < lojavirtualdb.sql";
+#docker exec -ti mariaDB sh -c "cd /home/bd && /usr/bin/mysql --user=root --password=root lojavirtualdb < lojavirtualdb.sql";
 #cat lojavirtualdb.sql | docker exec -i mariaDB /usr/bin/mysql -u root --password=root lojavirtualdb;
+docker exec -ti mariaDB sh -c "cd /home/bd && mysql -u root --password=root --database=lojavirtualdb < lojavirtualdb.sql"
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
