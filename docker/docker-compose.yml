@@ -9,6 +9,7 @@ db:
       - "3306:3306"
   environment:
      MYSQL_ROOT_PASSWORD: root  
+	 MYSQL_DATABASE: lojavirtualdb
   volumes:
      - ./mariadb/bd:/home/bd
      - ./mariadb/backup:/home/bkp 
