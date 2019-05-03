@@ -73,12 +73,12 @@ class UsersTableSeeder extends Seeder
         
         //Inserir vínculo entre produto e categoria
         //Lampada - Iluminação
-         DB::table('vinc_prod_categ')->insert([            
+         DB::table('vin_prod_categ')->insert([            
             'id_prod'  => 1,
             'id_categ' => 2
         ]);
          //Fogão - - Cozinha
-         DB::table('vinc_prod_categ')->insert([            
+         DB::table('vin_prod_categ')->insert([            
             'id_prod'  => 2,
             'id_categ' => 3
         ]);
