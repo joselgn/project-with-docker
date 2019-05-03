@@ -29,6 +29,7 @@ class UsersTableSeeder extends Seeder
             'nome' => 'Administrador',
             'perfil' => 1,            
             'email' => 'admin@teste.local',
+            'salt' => $salt,
             'password' => $password,
         ]);
     }//run
