@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         //Model Usuario
         $modelUser = new User();
         $salt = $modelUser->_createSalt();
-        $password = Hash::make($this->_criptoSenha($salt,'admin'));
+        $password = Hash::make($modelUser->_criptoSenha($salt,'admin'));
         
         
         //Inserindo perfil de admin        
