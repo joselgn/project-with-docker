@@ -97,12 +97,12 @@ class UsersTableSeeder extends Seeder
         
         //Vinculo Característica produto
         //Lampada LED
-        DB::table('caracteristicas')->insert([
+        DB::table('vin_prod_carac')->insert([
             'id_prod'  => 1,
             'id_carac' => 1
         ]); 
         //Fogão Preto
-        DB::table('caracteristicas')->insert([
+        DB::table('vin_prod_carac')->insert([
             'id_prod'  => 2,
             'id_carac' => 2
         ]); 
