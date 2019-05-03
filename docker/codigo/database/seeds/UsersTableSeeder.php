@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Categoria;
+use App\Models\Produto;
 
 
 class UsersTableSeeder extends Seeder
@@ -32,5 +34,82 @@ class UsersTableSeeder extends Seeder
             'salt' => $salt,
             'password' => $password,
         ]);
+        
+        //Inserir alguns Exemplos de Categorias
+        //Inserindo perfil de admin        
+        //Categoria PAI
+        DB::table('categorias')->insert([
+            'ativo'=> 1,
+            'nome' => 'Casar',
+            'tipo' => 1            
+        ]);
+        //Categoria Filho 1
+        DB::table('categorias')->insert([
+            'ativo'=> 1,
+            'nome' => 'Iluminação',
+            'tipo' => 1,
+            'id_cat_pai' => 1
+        ]);
+        //Categoria Filho 2
+        DB::table('categorias')->insert([
+            'ativo'=> 1,
+            'nome' => 'Cozinha',
+            'tipo' => 1,
+            'id_cat_pai' => 1
+        ]);        
+        
+        //Inserir alguns Exemplos de Produtos
+        //Produto 
+        DB::table('produtos')->insert([
+            'ativo' => 1,
+            'nome'  => 'Lâmpada LED',
+            'preco' => 23,20
+        ]);
+        DB::table('produtos')->insert([
+            'ativo' => 1,
+            'nome'  => 'Fogão Cooktop',
+            'preco' => 400,00
+        ]);
+        
+        //Inserir vínculo entre produto e categoria
+        //Lampada - Iluminação
+         DB::table('vinc_prod_categ')->insert([            
+            'id_prod'  => 1,
+            'id_categ' => 2
+        ]);
+         //Fogão - - Cozinha
+         DB::table('vinc_prod_categ')->insert([            
+            'id_prod'  => 2,
+            'id_categ' => 3
+        ]);
+         
+        //Inserindo algumas características
+        //LED
+        DB::table('caracteristicas')->insert([
+            'ativo'=> 1,
+            'nome' => 'LED'
+        ]);
+        //Preto
+        DB::table('caracteristicas')->insert([
+            'ativo'=> 1,
+            'nome' => 'Preto'
+        ]); 
+        
+        //Vinculo Característica produto
+        //Lampada LED
+        DB::table('caracteristicas')->insert([
+            'id_prod'  => 1,
+            'id_carac' => 1
+        ]); 
+        //Fogão Preto
+        DB::table('caracteristicas')->insert([
+            'id_prod'  => 2,
+            'id_carac' => 2
+        ]); 
+        
+        
+        
+         
+        
     }//run
 }//Classe 
