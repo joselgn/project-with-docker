@@ -63,12 +63,12 @@ class UsersTableSeeder extends Seeder
         DB::table('produtos')->insert([
             'ativo' => 1,
             'nome'  => 'Lâmpada LED',
-            'preco' => 23,20
+            'preco' => 23.20
         ]);
         DB::table('produtos')->insert([
             'ativo' => 1,
             'nome'  => 'Fogão Cooktop',
-            'preco' => 400,00
+            'preco' => 400.00
         ]);
         
         //Inserir vínculo entre produto e categoria
