@@ -70,7 +70,7 @@ class UsersTableSeeder extends Seeder
             'ativo' => 1,
             'nome'  => 'Fogão Cooktop',
             'preco' => 400.00,
-            'url_imagem' => '2.jpeg'
+            'url_imagem' => '2.jpg'
         ]);
         
         //Inserir vínculo entre produto e categoria
