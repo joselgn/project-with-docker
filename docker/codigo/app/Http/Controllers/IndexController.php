@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produto;
 use Illuminate\Http\Request;
+
+use App\Models\Produto;
+use App\Models\Categoria;
+
 
 class IndexController extends Controller{
 
@@ -26,12 +29,15 @@ class IndexController extends Controller{
     //Filtro categoria
     public function filtraCategoria(Request $request){
         $modelProdutos = new Produto();
+        $modelCategoria = new Categoria();
         $dadosLayout = $this->_initLayout();
 
         if(isset($request->menuid)) {
             $filtro = $request->menuid;
 
-            $vincProdCateg = $modelProdutos->vinculoProdCategPsq('id_categ',$filtro);
+            $prodsCateg = $modelProdutos->vinculoProdCategPsq('id_categ',$filtro);//Produtos com o ID da categoria 
+            $prodsCategPai = $modelCategoria->where(['id_cat_pai'=>$filtro])->all();//Todos os produtos vinculados a uma categoria, caso essa categoria seja pai
+            $vincProdCateg = $prodsCateg !=null ? $prodsCateg : $prodsCategPai;
             $aIdProdPermitidos =[];
             if($vincProdCateg!=null){
                 foreach ($vincProdCateg as $vinc){
