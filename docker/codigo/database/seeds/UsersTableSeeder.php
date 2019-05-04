@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
         //Categoria PAI
         DB::table('categorias')->insert([
             'ativo'=> 1,
-            'nome' => 'Casar',
+            'nome' => 'Casa',
             'tipo' => 1            
         ]);
         //Categoria Filho 1
@@ -63,12 +63,14 @@ class UsersTableSeeder extends Seeder
         DB::table('produtos')->insert([
             'ativo' => 1,
             'nome'  => 'Lâmpada LED',
-            'preco' => 23.20
+            'preco' => 23.20,
+            'url_imagem' => '1.jpeg'
         ]);
         DB::table('produtos')->insert([
             'ativo' => 1,
             'nome'  => 'Fogão Cooktop',
-            'preco' => 400.00
+            'preco' => 400.00,
+            'url_imagem' => '2.jpeg'
         ]);
         
         //Inserir vínculo entre produto e categoria
