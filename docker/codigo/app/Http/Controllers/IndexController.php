@@ -36,7 +36,7 @@ class IndexController extends Controller{
             $filtro = $request->menuid;
 
             $prodsCateg = $modelProdutos->vinculoProdCategPsq('id_categ',$filtro);//Produtos com o ID da categoria 
-            $prodsCategPai = $modelCategoria->where(['id_cat_pai'=>$filtro])->all();//Todos os produtos vinculados a uma categoria, caso essa categoria seja pai
+            $prodsCategPai = $modelCategoria->where(['id_cat_pai'=>$filtro])->get();//Todos os produtos vinculados a uma categoria, caso essa categoria seja pai
             $vincProdCateg = $prodsCateg !=null ? $prodsCateg : $prodsCategPai;
             $aIdProdPermitidos =[];
             if($vincProdCateg!=null){
