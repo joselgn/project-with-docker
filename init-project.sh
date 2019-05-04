@@ -58,6 +58,7 @@ docker-compose up -d;
 #Permissao storage 
 chmod -R 777 codigo;
 #Executando comandos de configuração da aplicação
+docker exec -ti lojavirtual-docker sh -c "chmod -R 777 /var/www/html/storage";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php composer.phar update";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:generate && php artisan config:cache";
 #Restaurando BD de teste
