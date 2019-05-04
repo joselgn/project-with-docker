@@ -35,15 +35,27 @@ class IndexController extends Controller{
         if(isset($request->menuid)) {
             $filtro = $request->menuid;
 
-            $prodsCateg = $modelProdutos->vinculoProdCategPsq('id_categ',$filtro);//Produtos com o ID da categoria 
-            $prodsCategPai = $modelCategoria->where(['id_cat_pai'=>$filtro])->get();//Todos os produtos vinculados a uma categoria, caso essa categoria seja pai
-            $vincProdCateg = $prodsCateg !=null ? $prodsCateg : $prodsCategPai;
+            $vincProdCateg = $modelProdutos->vinculoProdCategPsq('id_categ',$filtro);//Produtos com o ID da categoria                         
             $aIdProdPermitidos =[];
             if($vincProdCateg!=null){
                 foreach ($vincProdCateg as $vinc){
                     $aIdProdPermitidos[]= $vinc->id_prod;
                 }//foreach categorias
-            }//if vinc Prod Categoria
+            }else{
+                //Verifica se possui 
+                $categoriasVinculadas = $modelCategoria->where(['id_cat_pai'=>$filtro])->get();//Todas as categorias vinculadas a uma categoria, caso essa categoria seja pai
+                if($categoriasVinculadas!=null){
+                    foreach($categoriasVinculadas as $catPai){
+                        //Pesquisa por produtos Vinculadas a categoria
+                        $prodsVinc = $modelProdutos->vinculoProdCategPsq('id_categ',$catPai->id);//Produtos com o ID da categoria                         
+                        if($prodsVinc!=null){
+                            foreach ($prodsVinc as $vinc){
+                                $aIdProdPermitidos[]= $vinc->id_prod;
+                            }//foreach categorias
+                        }//if prods vinc a categorias
+                    }//foreach categorias vinculadas                    
+                }//if categorias vinculadas                
+            }//if / else vinc Prod Categoria
 
             $aProd = [];
             foreach($dadosLayout['allProds'] as $produto){
