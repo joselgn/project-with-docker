@@ -38,6 +38,8 @@ if [ $PKG_MANAGER==yum ]; then
     $PKG_MANAGER install -y python-pip;	
     pip install docker-compose;
 	pip install --upgrade pip;
+	systemctl enable docker.service;
+	systemctl start docker.service;
 else
     echo "PKG Managar : $PKG_MANAGER Installing docker-compose";
     curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
