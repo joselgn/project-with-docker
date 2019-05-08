@@ -29,10 +29,23 @@ PORT_LOCAL_APP=8081;
 PORT_LOCAL_BD=3306;
 #Instalando o Docker
 curl -fsSL https://get.docker.com | sh;
+
 #Instalando o docker-compose
-curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
-#chmod +x /usr/local/bin/docker-compose;
+echo "\n\n ================ Installing docker-compose =============================";
+if [ $PKG_MANAGER==yum ]; then
+    echo "YUM install docker-compose\n";
+    $PKG_MANAGER install -y epel-release;
+    $PKG_MANAGER install -y python-pip;	
+    pip install docker-compose;
+	pip install --upgrade pip;
+else
+    echo "PKG Managar : $PKG_MANAGER Installing docker-compose";
+    curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
+    chmod +x /usr/local/bin/docker-compose;
+fi
+
 docker-compose --version;
+echo "\n\n ================ docker-compose End Install =============================";
 #Permissão ao usuário para o docker
 usermod -aG docker $USER;
 #Criando pasta de projeto para a aplicação
