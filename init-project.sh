@@ -86,19 +86,19 @@ echo "\n\n ================ Setting up the containers ==========================
 #Executando o docker-compose
 docker-compose up -d;
 #Permissao storage 
-chmod -R 777 codigo;
+chmod -Rf 777 codigo;
 #Executando comandos de configuração da aplicação
 docker exec -ti lojavirtual-docker sh -c "chmod -Rf 777 /var/www/html/storage && chown -Rf apache:root /var/www/html/storage";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php composer.phar update";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:generate && php artisan config:cache";
 #Restaurando BD de teste
 cd mariadb/bd;
-docker exec -ti mariaDB sh -c "mysql --user=root --password=root --execute='create database lojavirtualdb'";
+docker -u root exec -ti mariaDB sh -c "mysql --user=root --password=root --execute='create database lojavirtualdb'";
 #docker exec -ti mariaDB sh -c "cd /home/bd && /usr/bin/mysql --user=root --password=root lojavirtualdb < lojavirtualdb.sql";
 #cat lojavirtualdb.sql | docker exec -i mariaDB /usr/bin/mysql -u root --password=root lojavirtualdb;
 #docker exec -ti mariaDB sh -c "cd /home/bd && mysql -u root --password=root --database=lojavirtualdb < lojavirtualdb.sql"
-docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan migrate";
-docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan db:seed --class=UsersTableSeeder";
+docker -u root exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan migrate";
+docker -u root exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan db:seed --class=UsersTableSeeder";
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
