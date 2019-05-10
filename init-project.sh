@@ -19,14 +19,21 @@ if [ -f "/etc/debian_version" ];then
   PKG_MANAGER=apt-get
 fi
 
+
+echo "\n\n ================ Updating package manager =============================";
 #Atualizando o Packge Manager
 $PKG_MANAGER -y update;
+
+echo "\n\n ================ Installing basic packs and git =============================";
 #Instalando dependências necessárias
-$PKG_MANAGER -y install git wget curl;
+$PKG_MANAGER -y install git wget curl vim;
+
 #Verificando o IP local
 IP_LOCAL=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}');
 PORT_LOCAL_APP=8081;
 PORT_LOCAL_BD=3306;
+
+echo "\n\n ================ Installing docker =============================";
 #Instalando o Docker
 curl -fsSL https://get.docker.com | sh;
 
@@ -52,11 +59,15 @@ echo "\n\n ================ docker-compose End Install =========================
 usermod -aG docker $USER;
 #Criando pasta de projeto para a aplicação
 cd /home/;
+
+echo "\n\n ================ Cloning the project into '/home/project' =============================";
 #Clonando o Projeto
 git clone https://github.com/joselgn/project-with-docker.git project;
 cd project;
 #DOCKER ========= 
 cd docker;
+
+echo "\n\n ================ Setting up the application =============================";
 #Configurando aplicação
 cd codigo;
 #Substituindo variáveis no arquivo
@@ -67,13 +78,17 @@ do
 done < "./.env.example";
 #Criando a imagem da aplicação
 cd ../;
+
+echo "\n\n ================ Creating app image from Dockerfile =============================";
 docker build -t lojavirtual-img .; 
+
+echo "\n\n ================ Setting up the containers =============================";
 #Executando o docker-compose
 docker-compose up -d;
 #Permissao storage 
 chmod -R 777 codigo;
 #Executando comandos de configuração da aplicação
-docker exec -ti lojavirtual-docker sh -c "chmod -Rf 777 /var/www/html/storage";
+docker exec -ti lojavirtual-docker sh -c "chmod -Rf 777 /var/www/html/storage && chown -R apache:root /var/www/html/storage";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php composer.phar update";
 docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan key:generate && php artisan config:cache";
 #Restaurando BD de teste
@@ -87,8 +102,10 @@ docker exec -ti lojavirtual-docker sh -c "cd /var/www/html && php artisan db:see
 
 #Visualizando containers ativos
 echo "\n\n\n\n\n :::Containers ativos::: \n\n";
+echo "\n\n ================ Active containers =============================";
 docker container ls;
 echo "\n\n>>>>>>>>>>>>>>>>>>>>>>> Fim do Script <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n
-      Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php\n
+      Acesse o navegador no seguinte endereço http://$IP_LOCAL:8081/public/index.php \n\n
+	  Thank you for contributing with me !!!! \n\n
       >>>>>>>>>>>>>>>>>>>>>>>>>>>xxxxxxxxxxxxxxx<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
 exit;
